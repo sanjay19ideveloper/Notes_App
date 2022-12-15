@@ -43,28 +43,57 @@ class _HomeScreenState extends State<HomeScreen> {
             Expanded(
               child: StreamBuilder<QuerySnapshot>(
                 stream:
-                    FirebaseFirestore.instance.collection("Notes").snapshots(),
+                    FirebaseFirestore.instance.collection("notes").snapshots(),
                 builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    return Center(
+                    return const Center(
                       child: CircularProgressIndicator(),
                     );
                   }
                   if (snapshot.hasData) {
                     return GridView(
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 2),
-                      children: snapshot.data!.docs
-                          .map((note) => noteCard(() {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => NoteReader(note),
-                                    ));
-                              }, note))
-                          .toList(),
-                    );
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2),
+                        children: snapshot.data!.docs
+                            .map((e) => InkWell(
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => NoteReader(e),
+                                        ));
+                                  },
+                                  child: Container(
+                                    height: 200,
+                                    width: 100,
+                                    margin: const EdgeInsets.all(8),
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(8),
+                                        color: AppStyle
+                                            .cardsColor[e.get('color_id')]),
+                                    child: Column(
+                                      children: [
+                                        Text(
+                                          e.get('note_title'),
+                                          style: const TextStyle(
+                                              color: Colors.white),
+                                        ),
+                                        Text(
+                                          e.get('creation_date'),
+                                          style: const TextStyle(
+                                              color: Colors.white),
+                                        ),
+                                        Text(
+                                          e.get('note_content'),
+                                          style: const TextStyle(
+                                              color: Colors.white),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ))
+                            .toList());
                   }
                   return Text(
                     "there is no Notes",
@@ -78,7 +107,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       floatingActionButton: FloatingActionButton.extended(
           onPressed: (() {}),
-          label: Text("Add Note"),
+          label: const Text("Add Note"),
           icon: const Icon(
             Icons.add,
           )),
