@@ -20,28 +20,31 @@ class _NoteReaderState extends State<NoteReader> {
         backgroundColor: AppStyle.cardsColor[color_id],
         elevation: 0.0,
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Text(
-            widget.doc["note_title"],
-            style: AppStyle.mainTitle,
-          ),
-          const SizedBox(
-            height: 4.0,
-          ),
-          Text(
-            widget.doc["creation_date"],
-            style: AppStyle.mainTitle,
-          ),
-          const SizedBox(
-            height: 8.0,
-          ),
-          Text(
-            widget.doc["note_content"],
-            style: AppStyle.mainTitle,
-          )
-        ],
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              widget.doc["note_title"],
+              style: AppStyle.mainTitle,
+            ),
+            const SizedBox(
+              height: 4.0,
+            ),
+            Text(
+              widget.doc["creation_date"],
+              style: AppStyle.mainTitle,
+            ),
+            const SizedBox(
+              height: 28.0,
+            ),
+            Text(
+              widget.doc["note_content"],
+              style: AppStyle.mainTitle,
+            )
+          ],
+        ),
       ),
     );
   }

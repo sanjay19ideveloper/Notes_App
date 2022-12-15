@@ -1,8 +1,11 @@
+import 'dart:core';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:notes_screen/note_card.dart';
-import 'package:notes_screen/note_reader.dart';
+
+import 'package:notes_screen/Screens/note_editor.dart';
+import 'package:notes_screen/Screens/note_reader.dart';
 import 'package:notes_screen/style.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -30,7 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Your recent Notes",
+              "Your all Notes",
               style: GoogleFonts.roboto(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
@@ -106,11 +109,13 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       floatingActionButton: FloatingActionButton.extended(
-          onPressed: (() {}),
-          label: const Text("Add Note"),
-          icon: const Icon(
-            Icons.add,
-          )),
+        onPressed: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const NoteEditor()));
+        },
+        label: const Text("Add Note"),
+        icon: const Icon(Icons.add),
+      ),
     );
   }
 }
