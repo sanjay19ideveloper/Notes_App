@@ -78,15 +78,30 @@ class _HomeScreenState extends State<HomeScreen> {
                                     child: Column(
                                       children: [
                                         Text(
-                                          e.get('note_title'),
+                                          e.get('note_title') ?? "",
+                                          style: const TextStyle(
+                                              color: Colors.white),
+                                        ),
+                                        // Text(
+                                        //   e.get('creation_date') ?? "",
+                                        //   style: const TextStyle(
+                                        //       color: Colors.white),
+                                        // ),
+                                        Text(
+                                          e.get('note_content') ?? "",
                                           style: const TextStyle(
                                               color: Colors.white),
                                         ),
                                         Text(
-                                          e.get('creation_date'),
+                                          e.get('note_title'),
                                           style: const TextStyle(
                                               color: Colors.white),
                                         ),
+                                        // Text(
+                                        //   e.get('creation_date'),
+                                        //   style: const TextStyle(
+                                        //       color: Colors.white),
+                                        // ),
                                         Text(
                                           e.get('note_content'),
                                           style: const TextStyle(

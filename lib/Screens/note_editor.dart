@@ -34,6 +34,7 @@ class _NoteEditorState extends State<NoteEditor> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             TextField(
+              controller: _titleController,
               decoration: const InputDecoration(
                 border: InputBorder.none,
                 hintText: "Note Title",
@@ -41,7 +42,7 @@ class _NoteEditorState extends State<NoteEditor> {
               style: AppStyle.mainTitle,
             ),
             TextField(
-              controller: _mainController,
+              controller: _titleController,
               keyboardType: TextInputType.multiline,
               maxLines: 2,
               decoration: const InputDecoration(
@@ -58,7 +59,7 @@ class _NoteEditorState extends State<NoteEditor> {
         onPressed: () async {
           FirebaseFirestore.instance.collection("notes").add({
             "note_title": _titleController.text,
-            "note_content": _titleController.text,
+            "note_content": _mainController.text,
             "color_id": color_id
           }).then((value) {
             print(value.id);
